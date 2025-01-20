@@ -1,0 +1,114 @@
+{
+    "is_main_simulation": true,
+    "logger_path": "./tmp/attack_CIFAR10_IID_global_fedavg_additive_10_perc.log",
+    "logger_level": 10,
+    "ram_usage_log_path": "./tmp/attack_CIFAR10_IID_global_fedavg_additive_10_perc_ram_usage_log.log",
+    "model_architecture_path": "./models/deep_model",
+    "starting_weights_path": "./models/deep_model_weights",
+    "starting_optimizer_state_path": null,
+    "num_of_processes_to_use_to_manage_nodes": 10,
+    "max_number_of_parallel_malicious_trainings": 9,
+    "max_number_of_parallel_honest_trainings": 16,
+    "max_number_of_parallel_validations": 20,
+    "max_num_of_rounds": 100,
+    "fit_epochs": 2,
+    "batch_size": 32,
+    "validation_with_test_set_after_model_aggregation": true,
+    "store_weights_directly_in_archive_tmp_dir": true,
+    "need_to_join_an_existing_network": false,
+    "entry_point_nodes": [],
+    "nodes_params":
+        {
+            "overall_num_of_nodes": 55,
+            "first_node_id": 1,
+            "host": "localhost",
+            "first_port": 9001,
+            "list_of_node_ids_allowed_to_produce_debug_log_messages": [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 19, 43]
+        },
+    "consensus_algorithm_params":
+        {
+            "type": "pow",
+            "perc_of_trainers_active_in_each_round": 1,
+            "list_of_active_trainers_in_the_first_round": null,
+            "nodes_computing_power": [
+                {
+                    "alias": "good",
+                    "node_ids": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                    "computing_power_factor": 1
+                },
+                {
+                    "alias": "mid-good",
+                    "node_ids": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+                    "computing_power_factor": 0.77
+                },
+                {
+                    "alias": "mid",
+                    "node_ids": [23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33],
+                    "computing_power_factor": 0.5
+                },
+                {
+                    "alias": "low-mid",
+                    "node_ids": [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44],
+                    "computing_power_factor": 0.33
+                },
+                {
+                    "alias": "low",
+                    "node_ids": [45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55],
+                    "computing_power_factor": 0.1
+                }
+            ]
+        },
+    "validation_algorithm_params":
+        {
+            "type": "global_dataset_validation",
+            "min_update_validation_score_first_round": 0.1,
+            "min_num_of_updates_between_aggregations": 10,
+            "max_num_of_updates_between_aggregations": 55,
+            "count_down_timer_to_start_aggregation": 600
+        },
+    "aggregation_algorithm_params":
+        {
+            "type": "fedavg"
+        },
+    "malicious_nodes_params":
+        {
+            "num_of_malicious_nodes": 5,
+            "list_of_collusion_peer_ids": [],
+            "node_behaviours": [
+                {
+                    "type": "additive_noise",
+                    "nodes_id": [7, 19, 28, 37, 49],
+                    "sigma": 0.5,
+                    "num_of_samples": 0,
+                    "starting_round_for_malicious_behaviour": 1
+                }
+            ]
+        },
+    "dataset_params":
+        {
+            "temperature": 0.3,
+            "dataset": "cifar10",
+            "num_of_quanta": 20,
+            "perc_of_iid_quanta": 1,
+            "lazy_loading": true,
+            "dataset_files_dir_path": "./datasets/cifar10_20_0",
+            "nodes_composite_datasets": [
+                {
+                    "alias": "good",
+                    "num_of_nodes": 55,
+                    "num_of_quanta_to_use": 5,
+                    "iid_quanta_to_use": 5
+                }
+            ]
+        },
+    "archive_params":
+        {
+            "archive_must_be_created": true,
+            "host": "localhost",
+            "port": 9000,
+            "tmp_dir": "./tmp/attack_CIFAR10_IID_global_fedavg_additive_10_perc_tmp_archive",
+            "persistent_mode": false,
+            "logger_path": "./tmp/attack_CIFAR10_IID_global_fedavg_additive_10_perc_archive_logger.log",
+            "logger_level": 20
+        }
+}

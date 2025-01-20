@@ -1,0 +1,94 @@
+{
+    "is_main_simulation": true,
+    "logger_path": "./tmp/attack_MNIST_IID_18_krum_mean_targeted_33_perc_50_start_150_round.log",
+    "logger_level": 10,
+    "ram_usage_log_path": "./tmp/attack_MNIST_IID_18_krum_mean_targeted_33_perc_50_start_150_round_ram_usage_log.log",
+    "model_architecture_path": "./models/shallow_model",
+    "starting_weights_path": "./models/shallow_model_weights",
+    "starting_optimizer_state_path": null,
+    "num_of_processes_to_use_to_manage_nodes": 10,
+    "max_number_of_parallel_malicious_trainings": 9,
+    "max_number_of_parallel_honest_trainings": 16,
+    "max_number_of_parallel_validations": 20,
+    "max_num_of_rounds": 150,
+    "fit_epochs": 2,
+    "batch_size": 32,
+    "validation_with_test_set_after_model_aggregation": true,
+    "store_weights_directly_in_archive_tmp_dir": true,
+    "need_to_join_an_existing_network": false,
+    "entry_point_nodes": [],
+    "nodes_params":
+        {
+            "overall_num_of_nodes": 55,
+            "first_node_id": 1,
+            "host": "localhost",
+            "first_port": 9001,
+            "list_of_node_ids_allowed_to_produce_debug_log_messages": [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 7, 19]
+        },
+    "consensus_algorithm_params":
+        {
+            "type": "pos",
+            "num_of_validators": 5,
+            "default_initial_node_stake": 0,
+            "amount_of_stake_to_add": 5,
+            "known_initial_nodes_stakes": [],
+            "perc_of_trainers_active_in_each_round": 1,
+            "perc_threshold_to_pass_validation": 0.6,
+            "list_of_node_ids_of_first_validators": [1, 20, 30, 40, 55]
+        },
+    "validation_algorithm_params":
+        {
+            "type": "krum",
+            "min_num_of_updates_needed_to_start_validation": 23,
+            "max_num_of_updates_needed_to_start_validation": 50,
+            "count_down_timer_to_start_validation": 600,
+            "num_of_updates_to_validate_negatively": 18,
+            "distance_function": "euclidean"
+        },
+    "aggregation_algorithm_params":
+        {
+            "type": "mean"
+        },
+    "malicious_nodes_params":
+        {
+            "num_of_malicious_nodes": 18,
+            "list_of_collusion_peer_ids": [],
+            "node_behaviours": [
+                {
+                    "type": "targeted_poisoning",
+                    "nodes_id": [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 55],
+                    "target_class": 1,
+                    "square_size": 4,
+                    "num_of_samples": 0,
+                    "starting_round_for_malicious_behaviour": 50
+                }
+            ]
+        },
+    "dataset_params":
+        {
+            "temperature": 0.3,
+            "dataset": "mnist",
+            "num_of_quanta": 20,
+            "perc_of_iid_quanta": 1,
+            "lazy_loading": true,
+            "dataset_files_dir_path": "./datasets/mnist_20_0",
+            "nodes_composite_datasets": [
+                {
+                    "alias": "good",
+                    "num_of_nodes": 55,
+                    "num_of_quanta_to_use": 5,
+                    "iid_quanta_to_use": 5
+                }
+            ]
+        },
+    "archive_params":
+        {
+            "archive_must_be_created": true,
+            "host": "localhost",
+            "port": 9000,
+            "tmp_dir": "./tmp/attack_MNIST_IID_18_krum_mean_targeted_33_perc_50_start_150_round_tmp_archive",
+            "persistent_mode": false,
+            "logger_path": "./tmp/attack_MNIST_IID_18_krum_mean_targeted_33_perc_50_start_150_round_archive_logger.log",
+            "logger_level": 20
+        }
+}
