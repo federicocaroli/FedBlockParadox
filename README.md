@@ -87,14 +87,6 @@ python -m src.main "config_path" \
 
 ---
 
-## 🔧 Configuration
-
-- Update dependencies and paths as needed.
-- Modify scripts to reflect your specific experimental setup.
-- Customize datasets and models to fit your use case.
-
----
-
 ## 🐳 Using Docker to Run the Simulator
 
 You can use Docker to simplify dependency management and ensure consistency across environments. Follow the steps below to run the simulator using Docker.
@@ -137,11 +129,19 @@ docker run -it -d -v ./container_based_examples/config.json:/usr/src/app/config.
   - `-d`: Runs the container in detached mode, leaving it running in the background.
   - `-v ./container_based_examples/config.json:/usr/src/app/config.json`: Mounts the configuration file from the host system to the container at `/usr/src/app/config.json`.
 
-### **6. Analyze Results**
+### **4. Analyze Results**
 
 After the simulation completes:
 - Logs and results are saved in the configured output volume.
 - Use scripts like `logger_to_graph.py` to visualize the results.
+
+---
+
+## 🔧 Configuration
+
+- Update dependencies and paths as needed.
+- Modify scripts to reflect your specific experimental setup.
+- Customize datasets and models to fit your use case.
 
 ---
 
