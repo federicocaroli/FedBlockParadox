@@ -1,0 +1,12 @@
+services:
+  manager:
+    container_name: FedBlockParadox
+    build: .
+    volumes:
+      - output_storage:/output/             # TODO: Modify the following to your needs
+
+# TODO: Modify the following to your needs
+volumes:
+  output_storage:
+    external: true
+    name: output
