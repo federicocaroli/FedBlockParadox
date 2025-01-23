@@ -95,6 +95,56 @@ python -m src.main "config_path" \
 
 ---
 
+## 🐳 Using Docker to Run the Simulator
+
+You can use Docker to simplify dependency management and ensure consistency across environments. Follow the steps below to run the simulator using Docker.
+
+### **1. Build the Docker Image**
+
+Clone the repository (if you haven’t already) and navigate to its directory:
+
+```bash
+git clone https://github.com/federicocaroli/FedBlockParadox.git
+cd FedBlockParadox
+```
+
+Build the Docker image from the provided `Dockerfile`:
+
+```bash
+docker build -t fedblockparadox_image .
+```
+
+### **2. Output Storage**
+
+The Docker Compose file provided in this repository is configured to use an external volume (`output`) for storing simulation results and log files. To use this feature:
+
+1. Ensure the volume exists:
+   ```bash
+   docker volume create output
+   ```
+
+### **3. Run the Simulator**
+
+Ensure you have a valid JSON configuration file for the simulation. You can modify the example located in the `container_based_examples/` directory.
+Run the Docker container with the required configuration file. For instance:
+
+```bash
+docker run -it -d -v ./container_based_examples/config.json:/usr/src/app/config.json fedblockparadox_image
+```
+
+- **Flags Explanation**:
+  - `-it`: Runs the container interactively with a terminal.
+  - `-d`: Runs the container in detached mode, leaving it running in the background.
+  - `-v ./container_based_examples/config.json:/usr/src/app/config.json`: Mounts the configuration file from the host system to the container at `/usr/src/app/config.json`.
+
+### **6. Analyze Results**
+
+After the simulation completes:
+- Logs and results are saved in the configured output volume.
+- Use scripts like `logger_to_graph.py` to visualize the results.
+
+---
+
 ## 📜 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
